@@ -105,8 +105,10 @@ class Runner(object):
       max_steps_per_episode: int, maximum number of steps after which an episode
         terminates.
     """
+    #Add line
+    tf.disable_eager_execution()
     tf.logging.info('max_steps_per_episode = %s', max_steps_per_episode)
-
+    
     if base_dir is None:
       raise ValueError('Missing base_dir.')
 
@@ -123,8 +125,8 @@ class Runner(object):
     # Reset the tf default graph to avoid name collisions from previous runs
     # before doing anything else.
     tf.reset_default_graph()
-    with tf.Graph().as_default():
-        self._summary_writer = tf.summary.FileWriter(self._output_dir)
+    #with tf.Graph().as_default():
+    self._summary_writer = tf.summary.FileWriter(self._output_dir)
     if self._episode_log_file:
       self._episode_writer = tf.io.TFRecordWriter(
           os.path.join(self._output_dir, self._episode_log_file))
