@@ -123,7 +123,7 @@ class Runner(object):
     # Reset the tf default graph to avoid name collisions from previous runs
     # before doing anything else.
     tf.reset_default_graph()
-    self._summary_writer = tf.summary.FileWriter(self._output_dir)
+    self._summary_writer = tf.summary.create_file_writer(self._output_dir)
     if self._episode_log_file:
       self._episode_writer = tf.io.TFRecordWriter(
           os.path.join(self._output_dir, self._episode_log_file))
